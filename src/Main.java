@@ -19,9 +19,14 @@ public class Main{
                 Window.printAllFilesInDir(Filehandler.readAllFilesFromPath(latestDir));
                 System.out.print("Command/Path:");
                 String c = s.next();
-                COMMANDTYPE.VALUE type = COMMANDTYPE.VALUE.getType(c);
+                Commands.VALUE type = Commands.VALUE.getType(c);
 
                 switch(type){
+                    case RESTORE: {
+                        latestDir = "/";
+                        break;
+                    }
+
                     case EXIT: {
                         on = false;
                         break;
@@ -33,10 +38,6 @@ public class Main{
                     case PATH: {
                         lastDir = latestDir;
                         latestDir += c + "/";
-                        break;
-                    }
-                    case RESTORE: {
-                        latestDir = "/";
                         break;
                     }
                 }
