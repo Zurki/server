@@ -7,23 +7,33 @@ import java.util.*;
 public class Main{
     public static void main(String[] args){
         Scanner s = new Scanner(System.in);
-        String lastDir = "/";
-        String latestDir = "/";
 
-        System.out.println(latestDir + ": \n");
+        String dirPath;
+        ArrayList dirs = new ArrayList();
+        dirs.add("/");
 
         boolean on = true;
 
         while(on){
             try{
-                Window.printAllFilesInDir(Filehandler.readAllFilesFromPath(latestDir));
+                dirPath = createPath(dirs);
+
+                Window.printAllFilesInDir(Filehandler.readAllFilesFromPath(dirPath));
                 System.out.print("Command/Path:");
                 String c = s.next();
                 Commands.VALUE type = Commands.VALUE.getType(c);
 
                 switch(type){
                     case RESTORE: {
-                        latestDir = "/";
+                        dirs = restoreDir();
+                        break;
+                    }
+
+                    case BACK: {
+                        if(dirs.size() <= 1)
+                            dirs = restoreDir();
+                        else
+                            dirs.remove(dirs.size() - 1);
                         break;
                     }
 
@@ -36,19 +46,34 @@ public class Main{
                         break;
                     }
                     case PATH: {
-                        lastDir = latestDir;
-                        latestDir += c + "/";
+                        dirs.add(c);
                         break;
                     }
                 }
             }
             catch(Exception ex){
                 System.out.println("not a valid input");
-                latestDir = lastDir;
+                if(dirs.size() <= 1)
+                    dirs = restoreDir();
+                else
+                    dirs.remove(dirs.size() - 1);
             }
         }
         s.close();
         //System.out.println();        //Window.printAllFilesInDir(Filehandler.readAllFilesFromPath(lastDir));
+    }
+
+    private static ArrayList restoreDir(){
+        ArrayList out = new ArrayList();
+        out.add("/");
+        return out;
+    }
+
+    private static String createPath(ArrayList arr){
+        String dir = "";
+        for(int i = 0; i < arr.size(); i++)
+            dir += arr.get(i) + "/";
+        return dir;
     }
 }
 

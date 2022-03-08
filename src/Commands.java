@@ -8,6 +8,7 @@ public class Commands{
         EXIT,
         COMMAND,
         PATH,
+        BACK,
         RESTORE;
 
         VALUE(){}
@@ -19,6 +20,10 @@ public class Commands{
                 case "!help":
                     return COMMAND;
 
+                case "!back":
+                    return BACK;
+                case "..":
+                    return BACK;
                 case "~":
                     return RESTORE;
                 case "!exit":
@@ -27,8 +32,6 @@ public class Commands{
         }
     }
 
-    public Commands(){
-    }
 
     public static void read(String c){
         System.out.println("COMMAND");
