@@ -17,6 +17,7 @@ public class Main{
         while(on){
             try{
                 dirPath = createPath(dirs);
+                System.out.println(dirPath);
 
                 Window.printAllFilesInDir(Filehandler.readAllFilesFromPath(dirPath));
                 System.out.print("Command/Path:");
@@ -42,7 +43,8 @@ public class Main{
                         break;
                     }
                     case COMMAND: {
-                        Commands.read(c);
+                        System.out.println(dirPath);
+                        Commands.read(c, dirPath);
                         break;
                     }
                     case PATH: {
@@ -53,7 +55,7 @@ public class Main{
             }
             catch(Exception ex){
                 System.out.println("not a valid input");
-                if(dirs.size() <= 1)
+                if(dirs.size() < 1)
                     dirs = restoreDir();
                 else
                     dirs.remove(dirs.size() - 1);
@@ -70,9 +72,11 @@ public class Main{
     }
 
     private static String createPath(ArrayList arr){
-        String dir = "";
-        for(int i = 0; i < arr.size(); i++)
-            dir += arr.get(i) + "/";
+        String dir = "/";
+        for(int i = 1; i < arr.size(); i++){
+            dir += arr.get(i);
+            dir += "/";
+        }
         return dir;
     }
 }

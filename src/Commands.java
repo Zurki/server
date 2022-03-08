@@ -17,7 +17,11 @@ public class Commands{
             switch(type){
                 default:
                     return PATH;
+
+
                 case "!help":
+                    return COMMAND;
+                case "!fcreate":
                     return COMMAND;
 
                 case "!back":
@@ -25,6 +29,8 @@ public class Commands{
                 case "..":
                     return BACK;
                 case "~":
+
+
                     return RESTORE;
                 case "!exit":
                     return EXIT;
@@ -33,7 +39,11 @@ public class Commands{
     }
 
 
-    public static void read(String c){
-        System.out.println("COMMAND");
+    public static void read(String c, String path) throws IOException{
+        switch(c){
+            case "!fcreate":
+                Filehandler.createFile(path);
+                break;
+        }
     }
 }
