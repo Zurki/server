@@ -15,9 +15,8 @@ public class Main{
         while(on){
             try{
                 dirPath = createPath(dirs);
-                System.out.println(dirPath);
-
                 Window.printAllFilesInDir(Filehandler.readAllFilesFromPath(dirPath));
+
                 System.out.print("Command/Path:");
                 String c = Window.reader.readLine();
                 Commands.VALUE type = Commands.VALUE.getType(c);
@@ -46,12 +45,12 @@ public class Main{
                     }
                     case PATH: {
                                    dirs.add(c);
-                                   System.out.println(c);
                                    break;
                     }
                 }
             }
             catch(Exception ex){
+                Window.error("Action not possible");
                 if(dirs.size() < 1)
                     dirs = restoreDir();
                 else

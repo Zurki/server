@@ -29,13 +29,21 @@ public class Filehandler{
         System.out.println(path + name);
         if(ans.equals(".")){
             Path p = Paths.get(path + name);
-            System.out.println("creating in here");
-            Files.createFile(p);
-            System.out.println("done");
+            if(!Files.exists(p)){
+                Files.createFile(p);
+                Window.success("File created");
+            }
+            else
+                Window.denied("File already exists");
         }
         else{
             Path p = Paths.get(ans + name);
-            Files.createFile(p);
+            if(!Files.exists(p)){
+                Files.createFile(p);
+                Window.success("File created");
+            }
+            else
+                Window.denied("File already exists");
         }
     }
 
