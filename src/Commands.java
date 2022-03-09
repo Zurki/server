@@ -39,7 +39,7 @@ public class Commands{
     }
 
 
-    public static void read(String c, String path) throws IOException{
+    public static void read(BufferedReader s, String c, String path) throws IOException{
         switch(c){
             case "!fcreate":
                 Filehandler.createFile(path);

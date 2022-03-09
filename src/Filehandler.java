@@ -18,14 +18,15 @@ public class Filehandler{
     public static void deleteFile(){
     }
 
-    public static void createFile(String path) throws IOException{
-        Scanner s = new Scanner(System.in);
+    public static void createFile(BufferedReader s, String path){
         System.out.println("to create File in current folder use '.'");
         System.out.print("Path> ");
-        String ans = s.next();
-        System.out.print("\nFilename> ");
-        String name = s.next();
+        String ans = s.readLine();
+        System.out.print("Filename> ");
+        String name = s.readLine();
 
+
+        System.out.println(path + name);
         if(ans.equals(".")){
             Path p = Paths.get(path + name);
             System.out.println("creating in here");
@@ -36,8 +37,6 @@ public class Filehandler{
             Path p = Paths.get(ans + name);
             Files.createFile(p);
         }
-
-        s.close();
     }
 
     public static void createFolder(String path, String name){

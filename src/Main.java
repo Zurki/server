@@ -5,10 +5,12 @@ import java.io.*;
 import java.util.*;
 
 public class Main{
-    public static void main(String[] args){
-        Scanner s = new Scanner(System.in);
+    static BufferedReader s;
 
-        String dirPath;
+
+    public static void main(String[] args){
+        s = new BufferedReader(new InputStreamReader(System.in));
+        String dirPath = "";
         ArrayList dirs = new ArrayList();
         dirs.add("/");
 
@@ -21,48 +23,48 @@ public class Main{
 
                 Window.printAllFilesInDir(Filehandler.readAllFilesFromPath(dirPath));
                 System.out.print("Command/Path:");
-                String c = s.next();
+                String c = s.readLine();
                 Commands.VALUE type = Commands.VALUE.getType(c);
 
                 switch(type){
                     case RESTORE: {
-                        dirs = restoreDir();
-                        break;
+                                      dirs = restoreDir();
+                                      break;
                     }
 
                     case BACK: {
-                        if(dirs.size() <= 1)
-                            dirs = restoreDir();
-                        else
-                            dirs.remove(dirs.size() - 1);
-                        break;
+                                   if(dirs.size() <= 1)
+                                       dirs = restoreDir();
+                                   else
+                                       dirs.remove(dirs.size() - 1);
+                                   break;
                     }
 
                     case EXIT: {
-                        on = false;
-                        break;
+                                   on = false;
+                                   break;
                     }
                     case COMMAND: {
-                        System.out.println(dirPath);
-                        Commands.read(c, dirPath);
-                        break;
+                                      Commands.read(s, c, dirPath);
+                                      break;
                     }
                     case PATH: {
-                        dirs.add(c);
-                        break;
+                                   dirs.add(c);
+                                   System.out.println(c);
+                                   break;
                     }
                 }
             }
             catch(Exception ex){
-                System.out.println("not a valid input");
                 if(dirs.size() < 1)
                     dirs = restoreDir();
                 else
                     dirs.remove(dirs.size() - 1);
             }
+            finally{
+                cleanUp();
+            }
         }
-        s.close();
-        //System.out.println();        //Window.printAllFilesInDir(Filehandler.readAllFilesFromPath(lastDir));
     }
 
     private static ArrayList restoreDir(){
@@ -79,5 +81,8 @@ public class Main{
         }
         return dir;
     }
-}
 
+    private static void cleanUp()throws IOException{
+        s.close();
+    }
+}

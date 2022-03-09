@@ -18,11 +18,6 @@ public class Window{
         }
     }
 
-    private String getFileType(File f){
-        //soll die Dateiendungen rausfindenr
-        return "needs implementation";
-    }
-
     private static String formatFileName(File f){
         if(f.getName().length() <= 15)
             return f.getName();
