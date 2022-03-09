@@ -5,11 +5,7 @@ import java.io.*;
 import java.util.*;
 
 public class Main{
-    static BufferedReader s;
-
-
     public static void main(String[] args){
-        s = new BufferedReader(new InputStreamReader(System.in));
         String dirPath = "";
         ArrayList dirs = new ArrayList();
         dirs.add("/");
@@ -23,7 +19,7 @@ public class Main{
 
                 Window.printAllFilesInDir(Filehandler.readAllFilesFromPath(dirPath));
                 System.out.print("Command/Path:");
-                String c = s.readLine();
+                String c = Window.reader.readLine();
                 Commands.VALUE type = Commands.VALUE.getType(c);
 
                 switch(type){
@@ -45,7 +41,7 @@ public class Main{
                                    break;
                     }
                     case COMMAND: {
-                                      Commands.read(s, c, dirPath);
+                                      Commands.read(c, dirPath);
                                       break;
                     }
                     case PATH: {
@@ -60,9 +56,6 @@ public class Main{
                     dirs = restoreDir();
                 else
                     dirs.remove(dirs.size() - 1);
-            }
-            finally{
-                cleanUp();
             }
         }
     }
@@ -80,9 +73,5 @@ public class Main{
             dir += "/";
         }
         return dir;
-    }
-
-    private static void cleanUp()throws IOException{
-        s.close();
     }
 }

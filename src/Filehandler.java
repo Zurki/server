@@ -18,12 +18,12 @@ public class Filehandler{
     public static void deleteFile(){
     }
 
-    public static void createFile(BufferedReader s, String path){
+    public static void createFile(String path) throws IOException{
         System.out.println("to create File in current folder use '.'");
         System.out.print("Path> ");
-        String ans = s.readLine();
+        String ans = Window.reader.readLine();
         System.out.print("Filename> ");
-        String name = s.readLine();
+        String name = Window.reader.readLine();
 
 
         System.out.println(path + name);

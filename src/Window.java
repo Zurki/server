@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.BasicFileAttributes;
 
 public class Window{
+    public static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
     public Window(){}
     public static void printAllFilesInDir(File[] allFiles){
         int i = 0;
