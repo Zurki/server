@@ -23,7 +23,7 @@ public class Filehandler{
         String ans = Window.input("Path> ");
         String name = Window.input("Filename> ");
 
-        if(ans.equals("."))
+        if(!ans.equals("."))
             path = ans;
 
         if(generateFile(path+ name)){
@@ -38,9 +38,10 @@ public class Filehandler{
         String ans = Window.input("Path> ");
         String name = Window.input("Filename> ");
 
-        if(ans.equals("."))
+        if(!ans.equals("."))
             path = ans;
 
+        System.out.println(ans);
         if(generateDir(path+ name)){
             Window.success("Directory created");
         }
