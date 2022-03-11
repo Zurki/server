@@ -18,6 +18,17 @@ public class Window{
 
     public Window(){}
 
+    public static String input(String msg){
+        try{
+            System.out.print("[INPUT] " + msg);
+            return reader.readLine();
+        }
+        catch (IOException ex){
+            input(msg);
+        }
+        return "";
+    }
+
     public static void error(String msg){
         System.out.println(ANSI_RED + "[ERROR]" + ANSI_RESET + msg);
     }
@@ -33,6 +44,7 @@ public class Window{
     public static void message(String msg){
         System.out.println("[CONSOLE] " + msg);
     }
+
 
     public static void success(String msg){
         System.out.println(ANSI_GREEN + "[SUCCESS] " + ANSI_RESET + msg);
@@ -68,7 +80,7 @@ public class Window{
                 " | " + att.size();
         }
         catch(IOException e){
-            System.out.println("FileNotFound");
+            error("File not found");
         }
         return "";
     }

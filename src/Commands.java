@@ -23,6 +23,8 @@ public class Commands{
                     return COMMAND;
                 case "!fcreate":
                     return COMMAND;
+                case "!mk":
+                    return COMMAND;
 
                 case "!back":
                     return BACK;
@@ -41,8 +43,14 @@ public class Commands{
 
     public static void read(String c, String path) throws IOException{
         switch(c){
+            case "!help":
+                Window.message("HELP");
+                break;
             case "!fcreate":
                 Filehandler.createFile(path);
+                break;
+            case "!mkdir":
+                //Filehandler.createDir(path);
                 break;
         }
     }

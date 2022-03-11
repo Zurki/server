@@ -19,35 +19,51 @@ public class Filehandler{
     }
 
     public static void createFile(String path) throws IOException{
-        System.out.println("to create File in current folder use '.'");
-        System.out.print("Path> ");
-        String ans = Window.reader.readLine();
-        System.out.print("Filename> ");
-        String name = Window.reader.readLine();
+        Window.message("To create File in current folder use '.'");
+        String ans = Window.input("Path> ");
+        String name = Window.input("Filename> ");
 
+        if(ans.equals("."))
+            path = ans;
 
-        System.out.println(path + name);
-        if(ans.equals(".")){
-            Path p = Paths.get(path + name);
-            if(!Files.exists(p)){
-                Files.createFile(p);
-                Window.success("File created");
-            }
-            else
-                Window.denied("File already exists");
+        if(generateFile(path+ name)){
+            Window.success("File created");
         }
-        else{
-            Path p = Paths.get(ans + name);
-            if(!Files.exists(p)){
-                Files.createFile(p);
-                Window.success("File created");
-            }
-            else
-                Window.denied("File already exists");
-        }
+        else
+            Window.denied("File already exists");
     }
 
-    public static void createFolder(String path, String name){
+    public static void createDir(String path) throws IOException{
+        Window.message("To create Directory in current folder use '.'");
+        String ans = Window.input("Path> ");
+        String name = Window.input("Filename> ");
 
+        if(ans.equals("."))
+            path = ans;
+
+        if(generateDir(path+ name)){
+            Window.success("Directory created");
+        }
+        else
+            Window.denied("Directory already exists");
+   }
+
+
+    private static boolean generateFile(String path) throws IOException{
+        Path p = Paths.get(path);
+        if(!Files.exists(p)){
+            Files.createFile(p);
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean generateDir(String path) throws IOException{
+        Path p = Paths.get(path);
+        if(!Files.exists(p)){
+            Files.createDirectory(p);
+            return true;
+        }
+        return false;
     }
 }
