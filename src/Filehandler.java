@@ -68,4 +68,11 @@ public class Filehandler{
         }
         return false;
     }
+
+    public static boolean isDirectoryExisting(String path){
+        Path p = Paths.get(path);
+        if(Files.exists(p) && Files.isDirectory(p))
+            return true;
+        return false;
+    }
 }

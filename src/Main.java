@@ -7,15 +7,14 @@ import java.util.*;
 public class Main{
     public static void main(String[] args){
         boolean autolist = Window.boolInput("Turn on autolist? (y/n)> ");
-        String dirPath = "";
         ArrayList dirs = new ArrayList();
         dirs.add("/");
+        String dirPath = createPath(dirs);
 
         boolean on = true;
 
         while(on){
             try{
-                dirPath = createPath(dirs);
                 if(autolist)
                     Window.printAllFilesInDir(dirPath, Filehandler.readAllFilesFromPath(dirPath));
 
@@ -47,9 +46,15 @@ public class Main{
                     }
                     case PATH: {
                                    dirs.add(c);
+                                   dirPath = createPath(dirs);
+                                   if(!Filehandler.isDirectoryExisting(dirPath)){
+                                        Window.error("Directory does not exist");
+                                        dirs.remove(dirs.size() - 1);
+                                   }
                                    break;
                     }
                 }
+                dirPath = createPath(dirs);
             }
             catch(Exception ex){
                 Window.error("Action not possible");
