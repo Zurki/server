@@ -15,7 +15,8 @@ public class Filehandler{
         return allFiles;
     }
 
-    public static void deleteFile(){
+    public static void deleteFile(String path){
+
     }
 
     public static void createFile(String path) throws IOException{
