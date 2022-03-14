@@ -15,6 +15,7 @@ public class Window{
     private static final String ANSI_GREEN = "\u001B[32m";
     private static final String ANSI_YELLOW = "\u001B[33m";
     private static final String ANSI_CYAN = "\u001B[36m";
+    private static final String ANSI_PURPLE = "\u001B[35m";
 
     public Window(){}
 
@@ -29,8 +30,24 @@ public class Window{
         return "";
     }
 
+    public static boolean boolInput(String msg){
+        try{
+            String in = input(msg);
+            if(in.equals("y"))
+                return true;
+            if(in.equals("n"))
+                return false;
+            else
+                throw new InputMismatchException();
+        }
+        catch(Exception e){
+            Window.error("Not a valid input");
+            return boolInput(msg);
+        }
+    }
+
     public static void error(String msg){
-        System.out.println(ANSI_RED + "[ERROR]" + ANSI_RESET + msg);
+        System.out.println(ANSI_RED + "[ERROR] " + ANSI_RESET + msg);
     }
 
     public static void denied(String msg){
@@ -45,12 +62,15 @@ public class Window{
         System.out.println("[CONSOLE] " + msg);
     }
 
+    public static void help(String msg){
+        System.out.println(ANSI_PURPLE + "[HELP] " + ANSI_RESET + msg);
+    }
 
     public static void success(String msg){
         System.out.println(ANSI_GREEN + "[SUCCESS] " + ANSI_RESET + msg);
     }
 
-    public static void printAllFilesInDir(File[] allFiles){
+    public static void printAllFilesInDir(String path, File[] allFiles){
         int i = 0;
         if(allFiles.length <= 0)
             warning("This directory is empty");

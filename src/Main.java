@@ -6,6 +6,7 @@ import java.util.*;
 
 public class Main{
     public static void main(String[] args){
+        boolean autolist = Window.boolInput("Turn on autolist? (y/n)> ");
         String dirPath = "";
         ArrayList dirs = new ArrayList();
         dirs.add("/");
@@ -15,9 +16,10 @@ public class Main{
         while(on){
             try{
                 dirPath = createPath(dirs);
-                Window.printAllFilesInDir(Filehandler.readAllFilesFromPath(dirPath));
+                if(autolist)
+                    Window.printAllFilesInDir(dirPath, Filehandler.readAllFilesFromPath(dirPath));
 
-                System.out.print("Command/Path:");
+                System.out.print("Command/Path> ");
                 String c = Window.reader.readLine();
                 Commands.VALUE type = Commands.VALUE.getType(c);
 
