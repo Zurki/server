@@ -15,9 +15,22 @@ public class Filehandler{
         return allFiles;
     }
 
-    public static void deleteFile(String path){
+    public static void deleteFile(String path)throws IOException{
+        Window.message("If you want to delete file in current folder use '.'");
+        String ans = Window.input("Path> ");
+        if(ans.equals("."))
+            ans = path + Window.input("File> ");
+        Path p = Paths.get(ans);
 
+        if(Files.exists(p)){
+            Files.delete(p);
+            Window.success(ans + " was deleted");
+        }
+
+        else
+            Window.error("File does not exist");
     }
+
 
     public static void createFile(String path) throws IOException{
         Window.message("To create File in current folder use '.'");
@@ -42,7 +55,6 @@ public class Filehandler{
         if(!ans.equals("."))
             path = ans;
 
-        System.out.println(ans);
         if(generateDir(path+ name)){
             Window.success("Directory created");
         }

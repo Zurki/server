@@ -6,8 +6,9 @@ import java.util.*;
 
 public class Sorter{
     public static File[] sortByName(File[] f){
-        return f;
-
+        String[] toSort = getNamesFromFileArr(f);
+        Arrays.sort(toSort);
+        return toSort;
     }
 
     public static File[] sortByDate(File[] f){
@@ -16,5 +17,13 @@ public class Sorter{
 
     public static File[] sortBySize(File[] f){
         return f;
+    }
+
+    private static String getNamesFromFileArr(File[] f){
+        ArrayList<String> out;
+        for (int i = 0; i < f.length; f++){
+            out.add(f[i].getName());
+        }
+        return out.toArray();
     }
 }

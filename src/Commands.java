@@ -41,6 +41,9 @@ public class Commands{
                 case "!curr":
                     return COMMAND;
 
+                case "!delete":
+                    return COMMAND;
+
                 case "!back":
                     return BACK;
                 case "..":
@@ -78,6 +81,10 @@ public class Commands{
 
             case "!curr":
                 Window.message("current folder: " + path);
+                break;
+
+            case "!delete":
+                Filehandler.deleteFile(path);
                 break;
 
             case "!fc":
